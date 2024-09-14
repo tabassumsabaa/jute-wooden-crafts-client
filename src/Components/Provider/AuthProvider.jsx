@@ -1,11 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-
-
-const auth = getAuth(app);
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
 export const AuthContext = createContext(null);
+
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({children}) => {
 
@@ -18,29 +18,39 @@ const AuthProvider = ({children}) => {
         return createUserWithEmailAndPassword(auth , email , password);
     };
 
-    // const singInUser = (email, password) =>{
-    //     setLoading(true);
-    //     return singInWithEmailAndPassword(auth, email, password);
-    // }
+    const signIn = ( email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password); 
+    };
+
+    const googleSignIn = () =>{
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    };
+
+    const logOut = () =>{
+        setLoading(true);
+        return signOut(auth);
+    };
+
+    useEffect(() =>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser =>{
+            setUser(currentUser);
+            setLoading(false);
+            if (currentUser) {
+                const userInfo = { email: currentUser.email};
+               console.log(userInfo);               
+            }        
+        });
+        return () =>{
+            return unsubscribe();
+        }
+    }, [])
+
+    const authInfo = {user, loading, createUser, signIn, googleSignIn, logOut };
     
-    // const logOut = () =>{
-    //     setLoading(true);
-    //     return singOut()
-    // }
-    const userInfo = {user, loading, createUser };
-    // const provider = new GoogleAuthProvider();
-    // signInWithPopup(auth , provider)
-    // .then(result =>{
-    //     const user = result.user;
-    //     console.log(user);
-    // })
-    // .catch(error =>{
-    //     console.log('error' , error.message);
-    // })
-
-
     return (
-        <AuthContext.Provider value={userInfo}>
+        <AuthContext.Provider value={authInfo}>
             {children}
         </AuthContext.Provider>
     );

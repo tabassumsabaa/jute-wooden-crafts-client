@@ -5,12 +5,13 @@ import Footer from "./Footer";
 import { useState } from "react";
 import ArtCraftCategory from "./ArtCraftCategory";
 import Banner from "./Banner";
+import Artician from "./Artician";
+
 
 
 const HomePage = () => {
     const loadedcrafts = useLoaderData();
-    const [crafts , setCrafts] = useState(loadedcrafts);
-    // const loadedArtCraft = useLoaderData(loadedArtCraft);
+    const [crafts , setCrafts] = useState(loadedcrafts);   
    
     return (
         <div>
@@ -32,12 +33,13 @@ const HomePage = () => {
             </div>
 
             <div className="my-10">
-                <h2 className="bg-base-200 text-5xl text-center p-5 font-bold">Home Decor</h2>
+                <h2 className="bg-[#dbbd8e]  text-5xl text-center p-5 font-bold">Home Decor Items</h2>
                 <div>
                     <ArtCraftCategory></ArtCraftCategory>
                 </div>                
             </div>
 
+            <Artician></Artician>
             <Footer></Footer>
         </div>
     );

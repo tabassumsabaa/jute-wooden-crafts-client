@@ -17,14 +17,16 @@ import ArtCraftCategory from './Components/ArtCraftCategory.jsx';
 import ViewDetails from './Components/ViewDetails.jsx';
 import MoreDetails from './Components/MoreDetails.jsx';
 import Users from './Components/Users.jsx';
-import PrivateRoute from './Components/PrivateRoute.jsx';
+//import PrivateRoute from './Components/PrivateRoute.jsx';
+import AllCraftItems from './Components/AllCraftItems.jsx';
+import { fetchItemDetails } from './Components/Fetch/DataFetch.jsx';
 //import ListItems from './Components/ListItems.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
     errorElement: <Error></Error>,
-    loader: () => fetch('http://localhost:5000/craft'),   
+    loader: () => fetch('http://localhost:5000/craft'),
   },
   {
     path: "/addcraft",
@@ -33,29 +35,35 @@ const router = createBrowserRouter([
   {
     path: "updatecraft/:id",
     element: <UpdateCraft></UpdateCraft>,
-    loader: ({params}) => fetch(`http://localhost:5000/craft/${params.id}`)
+    loader: ({ params }) => fetch(`http://localhost:5000/craft/${params.id}`)
   },
   {
-    path:"/singin",
+    path: "/singin",
     element: <SingIN></SingIN>
   },
   {
     path: "/singup",
     element: <SingUP></SingUP>,
-  }, 
+  },
   {
     path: "/view/:id",
     element: <ViewDetails></ViewDetails>,
-    loader: ({params}) => fetch(`http://localhost:5000/listItems/${params.id}`)
+    loader: async ({ params }) => {
+      const itemDetails = await fetchItemDetails(params.id);
+      if (!itemDetails) {
+        throw new Response('Item not found', { status: 404 });
+      }
+      return itemDetails;
+    }
   },
   {
     path: "/more/:id",
     element: <MoreDetails></MoreDetails>,
-    loader: ({params}) => fetch(`http://localhost:5000/craft/${params.id}`)
-  } ,
+    loader: ({ params }) => fetch(`http://localhost:5000/craft/${params.id}`)
+  },
   {
     path: "/listItems",
-    element: <ListItemCard></ListItemCard>,    
+    element: <ListItemCard></ListItemCard>,
   },
   {
     path: "/artCraftCategory",
@@ -66,14 +74,20 @@ const router = createBrowserRouter([
     path: "/users",
     element: <Users></Users>,
     loader: () => fetch('http://localhost:5000/users')
+  },
+  {
+    path: '/allCraftItems',
+    element: <AllCraftItems></AllCraftItems>
   }
- 
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode> 
-     <AuthProvider>
+  <React.StrictMode>
+    <div className='max-w-6xl mx-auto'>
+      <AuthProvider>
         <RouterProvider router={router} />
-     </AuthProvider>
+      </AuthProvider>
+    </div>
   </React.StrictMode>,
 )

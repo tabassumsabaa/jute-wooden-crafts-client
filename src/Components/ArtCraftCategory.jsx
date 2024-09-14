@@ -1,42 +1,70 @@
-//import { useLoaderData } from "react-router-dom";
-// import Navbar from "./Navbar";
-// import Footer from "./Footer";
- import { useState } from "react";
+import { useState } from "react";
 import ListItems from "./ListItems";
 import { useEffect } from "react";
+import KitchenWood from "./KitchenWood";
+import JuteHome from "./JuteHome";
 
 
 const ArtCraftCategory = () => {
-    // const loadedArtCraft = useLoaderData();
-   // const craftItems = useLoaderData();
-    //console.log(craftItems);
+
     const [craftItems, setCraftItems] = useState([]);
+    const [kitchens, setKitchens] = useState([]);
+    const [juteItems, setJuteItems] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:5000/listItems')
-          .then(res => res.json())
-          .then(data =>{            
-            setCraftItems(data)
-          })
+            .then(res => res.json())
+            .then(data => {
+                setCraftItems(data)
+            })
     })
+    useEffect(() => {
+        fetch('http://localhost:5000/kitchen')
+            .then(res => res.json())
+            .then(data => setKitchens(data))
+            .catch(err => console.error('Failed to fetch kitchen data', err));
+    }, []);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/jutehome')
+            .then(res => res.json())
+            .then(data => setJuteItems(data))
+            .catch(err => console.error('Failed to fetch jute home data', err));
+    }, []);
 
     return (
         <div>
-            {/* <Navbar></Navbar> */}
-            <div className=" w-3/5 m-auto my-10 p-5 ">
-               <h2 className="text-center text-3xl font-semibold text-slate-950">Home Decor With Wooden Craft: {craftItems.length}</h2>
-               <div className="grid grid-rows-1  gap-4">
-                {
-                    craftItems.map(craftItem => <ListItems 
-                        key={craftItem._id}
-                        craftItem={craftItem}  
-                        craftItems={craftItems}                        
-                        // setCraftItems={setCraftItems}
+            <div className="  ">
+                <h2 className="text-center text-3xl font-semibold text-slate-950 my-5">Home Decor With Wooden Craft: {craftItems.length}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 bg-red-200 my-10 p-5">
+                    {
+                        craftItems.map(craftItem => <ListItems
+                            key={craftItem._id}
+                            craftItem={craftItem}
+                            craftItems={craftItems}
                         ></ListItems>)
-                }
-               </div>
-            </div>  
-            {/* <Footer></Footer>  */}
+                    }
+                </div>
+            </div>
+
+            <div className="  ">
+                <h2 className="text-center text-3xl font-semibold text-slate-950 my-5">Kitchen Wooden Craft: {kitchens.length}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 bg-blue-200 p-5">
+                    {kitchens.map(kitchen => (
+                        <KitchenWood key={kitchen._id} kitchenItem={kitchen} />
+                    ))}
+                </div>
+            </div>
+
+            <div className="  ">
+                <h2 className="text-center text-3xl font-semibold text-slate-950 my-5">Jute Home Craft: {kitchens.length}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 bg-purple-300 p-5">
+                    {juteItems.map(jute => (
+                        <JuteHome key={jute._id} juteItem={jute} />
+                    ))}
+                </div>
+            </div>
+
         </div>
     );
 };

@@ -56,9 +56,7 @@ const Users = () => {
   <table className="table">
      <thead>
        <tr>
-         <th>
-           
-         </th>
+         <th>#</th>
         <th>Email</th>       
           <th>Created At:</th>
          <th>Last Logged In:</th>
@@ -69,8 +67,8 @@ const Users = () => {
     <tbody> 
       {/* row 1 */}
       { 
-         users.map( user => <tr key={user._id}>
-             <th>1</th>
+         users.map( (user, i) => <tr key={user._id}>
+             <th>{i + 1}</th>
              <td>{user.email}</td>
              <td></td>
              <td>{user.createdAt}</td>
