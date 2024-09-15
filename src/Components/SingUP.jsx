@@ -60,7 +60,7 @@ const SingUP = () => {
         // Add new user to database
         const createdAt = result.user?.metadata?.creationTime;
         const users = { email, createdAt };
-        fetch('http://localhost:5000/users', {
+        fetch('https://jute-wooden-craft-server.vercel.app/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -93,7 +93,7 @@ const SingUP = () => {
           name: result.user?.displayName,
           lastSignInTime: result.user?.metadata?.lastSignInTime,
         };
-        fetch('http://localhost:5000/users', {
+        fetch('https://jute-wooden-craft-server.vercel.app/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

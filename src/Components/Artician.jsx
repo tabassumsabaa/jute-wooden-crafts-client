@@ -7,7 +7,7 @@ const Artician = () => {
   
     // Fetch the artisans data
     useEffect(() => {
-      fetch("http://localhost:5000/artiest") 
+      fetch("https://jute-wooden-craft-server.vercel.app/artiest") 
         .then((res) => res.json())
         .then((data) => {
           setArtisans(data);  

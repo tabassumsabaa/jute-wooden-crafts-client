@@ -19,7 +19,7 @@ const KitchenWood = ({ kitchenItem }) => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/kitchen/${id}`, {
+                fetch(`https://jute-wooden-craft-server.vercel.app/kitchen/${id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())

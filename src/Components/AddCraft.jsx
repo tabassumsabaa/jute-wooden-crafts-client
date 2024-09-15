@@ -25,7 +25,7 @@ const AddCraft = () => {
         console.log(addedCraft);
 
         //send to  the server
-        fetch('http://localhost:5000/craft' , {
+        fetch('https://jute-wooden-craft-server.vercel.app/craft' , {
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'

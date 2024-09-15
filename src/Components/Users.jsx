@@ -23,7 +23,7 @@ const Users = () => {
           if (result.isConfirmed) {
           
           // console.log('delete confirm');
-          fetch(`http://localhost:5000/users/${_id}`, {
+          fetch(`https://jute-wooden-craft-server.vercel.app/users/${_id}`, {
               method: 'DELETE'                
           })
               .then(res => res.json())

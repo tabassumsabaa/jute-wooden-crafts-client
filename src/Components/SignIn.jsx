@@ -51,7 +51,7 @@ const SignIn = () => {
                     name: result.user?.displayName,
                     lastSignInTime: result.user?.metadata?.lastSignInTime,
                 };
-                fetch('http://localhost:5000/users', {
+                fetch('https://jute-wooden-craft-server.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

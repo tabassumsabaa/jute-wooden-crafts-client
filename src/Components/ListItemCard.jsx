@@ -25,7 +25,7 @@ const ListItemCard = () => {
         console.log(listItems);
 
          //send to  the server
-         fetch('http://localhost:5000/listItems' , {
+         fetch('https://jute-wooden-craft-server.vercel.app/listItems' , {
             method: 'POST',
             headers: {
                 'content-type' : 'application/json'

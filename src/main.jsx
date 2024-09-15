@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App></App>,
     errorElement: <Error></Error>,
-    loader: () => fetch('http://localhost:5000/craft'),
+    loader: () => fetch('https://jute-wooden-craft-server.vercel.app/craft'),
   },
   {
     path: "/addcraft",
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
   {
     path: "updatecraft/:id",
     element: <UpdateCraft></UpdateCraft>,
-    loader: ({ params }) => fetch(`http://localhost:5000/craft/${params.id}`)
+    loader: ({ params }) => fetch(`https://jute-wooden-craft-server.vercel.app/craft/${params.id}`)
   },
   {
     path: "/singin",
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
   {
     path: "/more/:id",
     element: <MoreDetails></MoreDetails>,
-    loader: ({ params }) => fetch(`http://localhost:5000/craft/${params.id}`)
+    loader: ({ params }) => fetch(`https://jute-wooden-craft-server.vercel.app/craft/${params.id}`)
   },
   {
     path: "/listItems",
@@ -67,12 +67,12 @@ const router = createBrowserRouter([
   {
     path: "/artCraftCategory",
     element: <ArtCraftCategory></ArtCraftCategory>,
-    //loader:() => fetch('http://localhost:5000/listItems'),
+    //loader:() => fetch('https://jute-wooden-craft-server.vercel.app/listItems'),
   },
   {
     path: "/users",
     element: <Users></Users>,
-    loader: () => fetch('http://localhost:5000/users')
+    loader: () => fetch('https://jute-wooden-craft-server.vercel.app/users')
   },
   {
     path: '/allCraftItems',

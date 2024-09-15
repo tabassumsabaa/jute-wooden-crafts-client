@@ -25,7 +25,7 @@ const ListItems = ({ craftItem }) => {
       if (result.isConfirmed) {
 
         // console.log('delete confirm');
-        fetch(`http://localhost:5000/listItems/${_id}`, {
+        fetch(`https://jute-wooden-craft-server.vercel.app/listItems/${_id}`, {
           method: 'DELETE'
         })
           .then(res => res.json())

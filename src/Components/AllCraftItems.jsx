@@ -10,15 +10,15 @@ const AllCraftItems = ({ items }) => {
 
     useEffect(() => {
         // Fetch craft items
-        const fetchCraftItems = fetch('http://localhost:5000/listItems')
+        const fetchCraftItems = fetch('https://jute-wooden-craft-server.vercel.app/listItems')
             .then(response => response.json());
 
         // Fetch kitchen items
-        const fetchKitchenItems = fetch('http://localhost:5000/kitchen')
+        const fetchKitchenItems = fetch('https://jute-wooden-craft-server.vercel.app/kitchen')
             .then(response => response.json());
 
         // Fetch jute home items
-        const fetchJuteHomeItems = fetch('http://localhost:5000/jutehome')
+        const fetchJuteHomeItems = fetch('https://jute-wooden-craft-server.vercel.app/jutehome')
             .then(response => response.json());
 
         // Combine all datasets

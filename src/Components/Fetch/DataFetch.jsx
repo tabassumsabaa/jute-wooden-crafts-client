@@ -2,9 +2,9 @@
 export const fetchItemDetails = async (id) => {
     try {
       const urls = [
-        `http://localhost:5000/listItems/${id}`,
-        `http://localhost:5000/kitchen/${id}`,
-        `http://localhost:5000/jutehome/${id}`,
+        `https://jute-wooden-craft-server.vercel.app/listItems/${id}`,
+        `https://jute-wooden-craft-server.vercel.app/kitchen/${id}`,
+        `https://jute-wooden-craft-server.vercel.app/jutehome/${id}`,
       ];
   
       for (const url of urls) {

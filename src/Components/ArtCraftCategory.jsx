@@ -12,21 +12,21 @@ const ArtCraftCategory = () => {
     const [juteItems, setJuteItems] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/listItems')
+        fetch('https://jute-wooden-craft-server.vercel.app/listItems')
             .then(res => res.json())
             .then(data => {
                 setCraftItems(data)
             })
     })
     useEffect(() => {
-        fetch('http://localhost:5000/kitchen')
+        fetch('https://jute-wooden-craft-server.vercel.app/kitchen')
             .then(res => res.json())
             .then(data => setKitchens(data))
             .catch(err => console.error('Failed to fetch kitchen data', err));
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:5000/jutehome')
+        fetch('https://jute-wooden-craft-server.vercel.app/jutehome')
             .then(res => res.json())
             .then(data => setJuteItems(data))
             .catch(err => console.error('Failed to fetch jute home data', err));
