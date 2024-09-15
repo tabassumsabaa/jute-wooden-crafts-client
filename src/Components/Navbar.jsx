@@ -1,7 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import logoimg from "../assets/Image/404/logo.png";
+import { useContext } from "react";
+import { AuthContext } from "./Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log("User logged out successfully");
+      })
+      .catch(error => {
+        console.error("Logout failed", error);
+      });
+  };
   const navLinks = <>
     <NavLink to="/">Home</NavLink>
     <NavLink to="/allCraftItems">All Items</NavLink>
@@ -37,15 +49,24 @@ const Navbar = () => {
         </div>
 
         <div className="dropdown dropdown-end flex">
-          <div className="mr-2">
-            <Link className="btn" to="/singin">Login</Link>
-            <Link className="btn" to="/singup">Register</Link>
-          </div>
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          {!user ? (
+            <div className="mr-2">
+              <Link className="btn" to="/singin">Login</Link>
+              <Link className="btn" to="/singup">Register</Link>
             </div>
-          </div>
+          ) : (
+            <button className="btn mr-2" onClick={handleLogout}>Logout</button>
+          )}
+          {user && (
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img
+                  alt="User Avatar"
+                  src={user.photoURL || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"}
+                />
+              </div>
+            </div>
+          )}
 
         </div>
 
