@@ -19,6 +19,7 @@ import Users from './Components/Users.jsx';
 import AllCraftItems from './Components/AllCraftItems.jsx';
 import { fetchItemDetails } from './Components/Fetch/DataFetch.jsx';
 import SignIn from './Components/SignIn.jsx';
+import PrivateRoute from "./Components/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,11 +30,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/addcraft",
-    element: <AddCraft></AddCraft>,
+    element: <PrivateRoute><AddCraft></AddCraft></PrivateRoute>,
   },
   {
     path: "updatecraft/:id",
-    element: <UpdateCraft></UpdateCraft>,
+    element: <PrivateRoute><UpdateCraft></UpdateCraft></PrivateRoute>,
     loader: ({ params }) => fetch(`https://jute-wooden-craft-server.vercel.app/craft/${params.id}`)
   },
   {
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/listItems",
-    element: <ListItemCard></ListItemCard>,
+    element: <PrivateRoute><ListItemCard></ListItemCard></PrivateRoute>,
   },
   {
     path: "/artCraftCategory",
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/users",
-    element: <Users></Users>,
+    element: <PrivateRoute><Users></Users></PrivateRoute>,
     loader: () => fetch('https://jute-wooden-craft-server.vercel.app/users')
   },
   {

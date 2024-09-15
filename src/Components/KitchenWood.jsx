@@ -4,33 +4,44 @@ import { CiBadgeDollar } from "react-icons/ci";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./Provider/AuthProvider";
 
 const KitchenWood = ({ kitchenItem }) => {
     const { _id, item_name, subcategory_Name,  processing_time, price, rating, customization, stockStatus, image } = kitchenItem || {};
+    const { user } = useContext(AuthContext);
 
-    const handleDelete = (id) => {
+    const handleDelete = _id => {
+        if (!user) {
+          Swal.fire("You must be logged in to delete items!");
+          return;
+        }    
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`https://jute-wooden-craft-server.vercel.app/kitchen/${id}`, {
-                    method: "DELETE",
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.deletedCount > 0) {
-                            Swal.fire("Deleted!", "Your kitchen item has been deleted.", "success");
-                        }
-                    });
-            }
+          if (result.isConfirmed) {
+            fetch(`https://jute-wooden-craft-server.vercel.app/kitchen/${id}`, {
+              method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.deletedCount > 0) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your kitchen item has been deleted.",
+                  icon: "success"
+                });
+              }
+            });
+          }
         });
-    };
+      };
 
     return (
         <div>

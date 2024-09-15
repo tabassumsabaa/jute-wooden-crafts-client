@@ -5,14 +5,20 @@ import { IoIosTimer } from "react-icons/io";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "./Provider/AuthProvider";
 
 
 const ListItems = ({ craftItem }) => {
 
   const { _id, item_name, subcategory_Name, description, processing_time, price, rating, customization, stockStatus, image } = craftItem || {}
-
+  const { user } = useContext(AuthContext);
+   
   const handleDelete = _id => {
-    console.log(_id);
+    if (!user) {
+      Swal.fire("You must be logged in to delete items!");
+      return;
+    }    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -23,26 +29,21 @@ const ListItems = ({ craftItem }) => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-
-        // console.log('delete confirm');
         fetch(`https://jute-wooden-craft-server.vercel.app/listItems/${_id}`, {
           method: 'DELETE'
         })
-          .then(res => res.json())
-          .then(data => {
-            console.log(data);
-            if (data.deletedCount > 0) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your craft has been deleted.",
-                icon: "success"
-              });
-
-            }
-          })
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your craft has been deleted.",
+              icon: "success"
+            });
+          }
+        });
       }
     });
-
   }
 
   return (

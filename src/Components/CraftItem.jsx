@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { IoIosMore } from "react-icons/io";
+import { useContext } from "react";
+import { AuthContext } from "./Provider/AuthProvider";
 
 
 
@@ -13,42 +15,39 @@ const CraftItem = ({ craft, crafts, setCrafts }) => {
 
 
   const { _id, item_name, subcategory_Name, description, processing_time, price, rating, customization, stockStatus, image } = craft;
+  const { user } = useContext(AuthContext);
 
   const handleDelete = _id => {
-    console.log(_id);
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to delete this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-
-        // console.log('delete confirm');
-        fetch(`https://jute-wooden-craft-server.vercel.app/craft/${_id}`, {
-          method: 'DELETE'
-        })
+      if (!user) {
+        Swal.fire("You must be logged in to delete items!");
+        return;
+      }    
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`https://jute-wooden-craft-server.vercel.app/craft/${_id}`, {
+            method: 'DELETE'
+          })
           .then(res => res.json())
           .then(data => {
-            console.log(data);
             if (data.deletedCount > 0) {
               Swal.fire({
                 title: "Deleted!",
                 text: "Your craft has been deleted.",
-                icon: "Successful"
+                icon: "success"
               });
-              const remaining = crafts.filter(craft => craft._id !== _id);
-              setCrafts(remaining);
-              console.log(remaining)
             }
-          })
-      }
-    });
-
-  }
+          });
+        }
+      });
+    };
 
   return (
     <div>

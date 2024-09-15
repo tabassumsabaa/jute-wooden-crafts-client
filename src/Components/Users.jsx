@@ -22,7 +22,6 @@ const Users = () => {
         }).then((result) => {
           if (result.isConfirmed) {
           
-          // console.log('delete confirm');
           fetch(`https://jute-wooden-craft-server.vercel.app/users/${_id}`, {
               method: 'DELETE'                
           })

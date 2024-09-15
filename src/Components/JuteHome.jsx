@@ -4,33 +4,46 @@ import { CiBadgeDollar } from "react-icons/ci";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./Provider/AuthProvider";
 
 const JuteHome = ({ juteItem }) => {
     const { _id, item_name, subcategory_Name, processing_time, price, rating, customization, stockStatus, image } = juteItem || {};
 
-    const handleDelete = (id) => {
+    const { user } = useContext(AuthContext);
+
+    const handleDelete = _id => {
+        if (!user) {
+          Swal.fire("You must be logged in to delete items!");
+          return;
+        }    
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
         }).then((result) => {
-            if (result.isConfirmed) {
-                fetch(`https://jute-wooden-craft-server.vercel.app/jutehome/${id}`, {
-                    method: "DELETE",
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        if (data.deletedCount > 0) {
-                            Swal.fire("Deleted!", "Your jute item has been deleted.", "success");
-                        }
-                    });
-            }
+          if (result.isConfirmed) {
+            fetch(`https://jute-wooden-craft-server.vercel.app/jutehome/${id}`, {
+              method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+              if (data.deletedCount > 0) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your jute item has been deleted.",
+                  icon: "success"
+                });
+              }
+            });
+          }
         });
-    };
+      };
+
     return (
         <div>
            <div className="card card-side bg-base-100 shadow-xl">
