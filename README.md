@@ -1,8 +1,39 @@
-# React + Vite
+# 🪵 Woodsy Wonders – A Wooden Craft Art Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Site:** [https://your-website-link.web.app]  
+*(Replace with your actual live site URL)*
 
-Currently, two official plugins are available:
+**Woodsy Wonders** is an elegant art & craft store website focused exclusively on **Wooden Crafts**. From hand-carved sculptures to rustic wooden decor, this platform brings the charm of natural woodwork into the digital space — celebrating craftsmanship, sustainability, and timeless beauty.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+## ✨ Features
+
+- 🪚 **Wooden Craft-Only Products** – All listings are made from wood: carved animals, rustic wall decor, wooden toys, mini furniture, and more.
+- 🛍️ **Craft Item Cards** – Showcased with photos, titles, pricing, and brief descriptions.
+- 🔐 **Authentication System** – Users can register and log in.
+- 🔒 **Private Routes** – Detailed views of craft items available only for logged-in users.
+- 🌐 **Responsive Design** – Looks great on mobile, tablet, and desktop.
+- 🚀 **Deployed on Firebase** – Fully live and shareable.
+
+---
+
+## 🧰 Tech Stack
+
+- **React.js** – Frontend framework
+- **React Router** – Page navigation and private routing
+- **Firebase Hosting & Auth** – Live deployment and user authentication
+- **Tailwind CSS** – For styling and layout
+
+---
+
+## 📁 Folder Structure
+/src
+/components
+/pages
+/assets
+/routes
+App.jsx
+main.jsx
+
+
