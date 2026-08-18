@@ -1,93 +1,98 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Error from './Components/Error.jsx';
-import AddCraft from './Components/AddCraft.jsx';
-import UpdateCraft from './Components/UpdateCraft.jsx';
-import SingUP from './Components/SingUP.jsx';
-import AuthProvider from './Components/Provider/AuthProvider.jsx';
-import ListItemCard from './Components/ListItemCard.jsx';
-import ArtCraftCategory from './Components/ArtCraftCategory.jsx';
-import ViewDetails from './Components/ViewDetails.jsx';
-import MoreDetails from './Components/MoreDetails.jsx';
-import Users from './Components/Users.jsx';
-import AllCraftItems from './Components/AllCraftItems.jsx';
-import { fetchItemDetails } from './Components/Fetch/DataFetch.jsx';
-import SignIn from './Components/SignIn.jsx';
-import PrivateRoute from "./Components/PrivateRoute.jsx";
+
+import "./index.css";
+
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import AddCraft from "./Pages/AddCraft";
+import AllCrafts from "./Pages/AllCraft";
+import ViewDetails from "./Pages/ViewDetails";
+import MyCrafts from "./Pages/MyCrafts";
+import UpdateCraft from "./Pages/UpdateCraft";
+import CategoryItems from "./Pages/CategoryItems";
+import NotFound from "./Pages/NotFound";
+
+import PrivateRoute from "./Components/PrivateRoute";
+import AuthProvider from "./AuthProvider";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
-    errorElement: <Error></Error>,
-    loader: () => fetch('https://jute-wooden-craft-server.vercel.app/craft'),
+    element: <Home />,
   },
+
   {
-    path: "/addcraft",
-    element: <PrivateRoute><AddCraft></AddCraft></PrivateRoute>,
+    path: "/login",
+    element: <Login />,
   },
+
   {
-    path: "updatecraft/:id",
-    element: <PrivateRoute><UpdateCraft></UpdateCraft></PrivateRoute>,
-    loader: ({ params }) => fetch(`https://jute-wooden-craft-server.vercel.app/craft/${params.id}`)
+    path: "/register",
+    element: <Register />,
   },
+
   {
-    path: "/singin",
-    element: <SignIn></SignIn>
+    path: "/all-crafts",
+    element: <AllCrafts />,
   },
+
   {
-    path: "/singup",
-    element: <SingUP></SingUP>,
+    path: "/add-craft",
+    element: (
+      <PrivateRoute>
+        <AddCraft />
+      </PrivateRoute>
+    ),
   },
+
   {
     path: "/view/:id",
-    element: <ViewDetails></ViewDetails>,
-    loader: async ({ params }) => {
-      const itemDetails = await fetchItemDetails(params.id);
-      if (!itemDetails) {
-        throw new Response('Item not found', { status: 404 });
-      }
-      return itemDetails;
-    }
+    element: (
+      <PrivateRoute>
+        <ViewDetails />
+      </PrivateRoute>
+    ),
   },
-  {
-    path: "/more/:id",
-    element: <MoreDetails></MoreDetails>,
-    loader: ({ params }) => fetch(`https://jute-wooden-craft-server.vercel.app/craft/${params.id}`)
-  },
-  {
-    path: "/listItems",
-    element: <PrivateRoute><ListItemCard></ListItemCard></PrivateRoute>,
-  },
-  {
-    path: "/artCraftCategory",
-    element: <ArtCraftCategory></ArtCraftCategory>,
-    //loader:() => fetch('https://jute-wooden-craft-server.vercel.app/listItems'),
-  },
-  {
-    path: "/users",
-    element: <PrivateRoute><Users></Users></PrivateRoute>,
-    loader: () => fetch('https://jute-wooden-craft-server.vercel.app/users')
-  },
-  {
-    path: '/allCraftItems',
-    element: <AllCraftItems></AllCraftItems>
-  }
 
+  {
+    path: "/my-crafts",
+    element: (
+      <PrivateRoute>
+        <MyCrafts />
+      </PrivateRoute>
+    ),
+  },
+
+  {
+    path: "/update-craft/:id",
+    element: (
+      <PrivateRoute>
+        <UpdateCraft />
+      </PrivateRoute>
+    ),
+  },
+
+  {
+    path: "/category/:subcategory",
+    element: <CategoryItems />,
+  },
+
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className='max-w-6xl mx-auto'>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </div>
-  </React.StrictMode>,
-)
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </React.StrictMode>
+);

@@ -1,38 +1,264 @@
-
+import banner1 from "../assets/Image/banner/HandCraftJute.png";
+import banner2 from "../assets/Image/banner/woodenHomeCraft.png";
+import banner3 from "../assets/Image/banner/HandCraft.png";
+import { Typewriter } from "react-simple-typewriter";
 
 const Banner = () => {
-    return (
-      <div className="relative">
-            <div className="carousel max-h-96 w-full relative">
-                <div id="item1" className="carousel-item w-full relative">
-                    <img src="https://i.ibb.co/ZK2dyj4/handmade-natural-jute-knitted-items-for-home-decoration-scandinavian-style-beige-tones-no-people-sus.jpg" className="w-full" alt="Jute Home Decor" />
-                    <div className="absolute bottom-10 left-5 text-white bg-black bg-opacity-50 p-4 rounded-lg z-10">
-                        <h1 className="text-2xl font-bold">Jute Home Craft</h1>
-                        <p>Discover beautifully handmade jute items, perfect for home decoration and style.</p>
-                    </div>
-                </div>
-                <div id="item2" className="carousel-item w-full relative">
-                    <img src="https://i.ibb.co/pj8zdmC/gray-sofa-living-room-with-copy-space-43614-926.jpg" className="w-full" alt="Wood Home Decor" />
-                    <div className="absolute bottom-10 left-5 text-white bg-black bg-opacity-50 p-4 rounded-lg z-10">
-                        <h1 className="text-2xl font-bold">Wood Home Decor Items</h1>
-                        <p>Explore elegant wood decor items to enhance the beauty of your home interior.</p>
-                    </div>
-                </div>
-                <div id="item3" className="carousel-item w-full relative">
-                    <img src="https://i.ibb.co/87m8nXL/photorealistic-wooden-house-interior-with-timber-decor-furnishings-23-2151263513.jpg" className="w-full" alt="Wood Kitchen Accessories" />
-                    <div className="absolute bottom-10 left-5 text-white bg-black bg-opacity-50 p-4 rounded-lg z-10">
-                        <h1 className="text-2xl font-bold">Wood Kitchen Accessories</h1>
-                        <p>Find stylish wooden accessories to complement your kitchen's functionality and design.</p>
-                    </div>
-                </div>
+  const slides = [
+    {
+      id: 1,
+      image: banner1,
+      title: "Handcrafted Jute Creations",
+      description:
+        "Discover sustainable and beautifully crafted jute products made for modern homes.",
+    },
+    {
+      id: 2,
+      image: banner2,
+      title: "Timeless Wooden Crafts",
+      description:
+        "Explore unique wooden decor, furniture and handmade pieces crafted with care.",
+    },
+    {
+      id: 3,
+      image: banner3,
+      title: "Crafted by Hands, Made with Heart",
+      description:
+        "Celebrate traditional craftsmanship through meaningful jute and wooden creations.",
+    },
+  ];
+
+  return (
+    <section className="max-w-7xl mx-auto px-3 md:px-6 mt-5 md:mt-7">
+      <div className="carousel w-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+
+        {slides.map((slide, index) => (
+          <div
+            key={slide.id}
+            id={`slide${slide.id}`}
+            className="carousel-item relative w-full"
+          >
+            {/* Banner Image */}
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="
+                w-full
+                h-[300px]
+                sm:h-[360px]
+                md:h-[450px]
+                lg:h-[520px]
+                object-cover
+              "
+            />
+
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/50"></div>
+
+            {/* Banner Content */}
+            <div className="absolute inset-0 flex items-center">
+              <div
+                className="
+                  max-w-3xl
+                  px-14
+                  sm:px-16
+                  md:px-24
+                  lg:px-28
+                  text-white
+                "
+              >
+                {/* Small Title */}
+                <p
+                  className="
+                    text-[10px]
+                    sm:text-xs
+                    md:text-sm
+                    uppercase
+                    tracking-[0.18em]
+                    md:tracking-[0.25em]
+                    text-amber-300
+                    font-semibold
+                    mb-2 md:mb-4
+                  "
+                >
+                   <Typewriter
+    words={[
+      "Jute & Wooden Crafts",
+      "Handmade with Care",
+      "Natural & Sustainable",
+    ]}
+    loop={true}
+    cursor
+    cursorStyle="|"
+    typeSpeed={70}
+    deleteSpeed={40}
+    delaySpeed={1300}
+  />
+                </p>
+
+                {/* Main Title */}
+                <h2
+                  className="
+                    text-2xl
+                    sm:text-3xl
+                    md:text-4xl
+                    lg:text-5xl
+                    font-bold
+                    leading-tight
+                    mb-3 md:mb-5
+                  "
+                >
+                  {slide.title}
+                </h2>
+
+                {/* Description */}
+                <p
+                  className="
+                    text-xs
+                    sm:text-sm
+                    md:text-base
+                    lg:text-lg
+                    text-gray-200
+                    leading-relaxed
+                    max-w-xl
+                  "
+                >
+                  {slide.description}
+                </p>
+
+                {/* Explore Button */}
+                <a
+                  href="#featured-crafts"
+                  className="
+                    inline-flex
+                    mt-5 md:mt-7
+                    px-5 md:px-7
+                    py-2.5 md:py-3
+                    rounded-full
+                    bg-amber-600
+                    hover:bg-amber-700
+                    text-white
+                    text-xs md:text-sm
+                    font-semibold
+                    transition-all
+                    duration-300
+                    shadow-lg
+                  "
+                >
+                  Explore Crafts
+                </a>
+              </div>
             </div>
-            <div className="flex justify-center w-full py-2 gap-2">
-                <a href="#item1" className="btn btn-xs">1</a>
-                <a href="#item2" className="btn btn-xs">2</a>
-                <a href="#item3" className="btn btn-xs">3</a>
-            </div>
-        </div>
-    );
+
+            {/* Previous Arrow */}
+            <a
+              href={`#slide${
+                index === 0 ? slides.length : index
+              }`}
+              className="
+                absolute
+                left-2 sm:left-3 md:left-6
+                top-1/2
+                -translate-y-1/2
+
+                w-8 h-8
+                sm:w-9 sm:h-9
+                md:w-12 md:h-12
+
+                flex
+                items-center
+                justify-center
+
+                rounded-full
+                bg-black/40
+                hover:bg-amber-600
+
+                text-white
+                text-sm md:text-lg
+
+                border
+                border-white/30
+
+                backdrop-blur-sm
+
+                transition-all
+                duration-300
+
+                z-20
+              "
+              aria-label="Previous slide"
+            >
+              ❮
+            </a>
+
+            {/* Next Arrow */}
+            <a
+              href={`#slide${
+                index === slides.length - 1
+                  ? 1
+                  : index + 2
+              }`}
+              className="
+                absolute
+                right-2 sm:right-3 md:right-6
+                top-1/2
+                -translate-y-1/2
+
+                w-8 h-8
+                sm:w-9 sm:h-9
+                md:w-12 md:h-12
+
+                flex
+                items-center
+                justify-center
+
+                rounded-full
+                bg-black/40
+                hover:bg-amber-600
+
+                text-white
+                text-sm md:text-lg
+
+                border
+                border-white/30
+
+                backdrop-blur-sm
+
+                transition-all
+                duration-300
+
+                z-20
+              "
+              aria-label="Next slide"
+            >
+              ❯
+            </a>
+
+          </div>
+        ))}
+
+      </div>
+
+      {/* Bottom Slide Indicators */}
+      <div className="flex justify-center gap-2 mt-4">
+        {slides.map((slide) => (
+          <a
+            key={slide.id}
+            href={`#slide${slide.id}`}
+            className="
+              w-2.5 h-2.5
+              rounded-full
+              bg-amber-500
+              hover:scale-125
+              transition-transform
+              duration-300
+            "
+            aria-label={`Go to slide ${slide.id}`}
+          ></a>
+        ))}
+      </div>
+    </section>
+  );
 };
 
 export default Banner;
