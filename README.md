@@ -1,7 +1,6 @@
 # 🪵 Woodsy Wonders – A Wooden Craft Art Store
 
-**Live Site:** [https://your-website-link.web.app]  
-*(Replace with your actual live site URL)*
+**Live Site:** [[https://your-website-link.web.app](https://jute-wooden-crafts-client.vercel.app/)]  
 
 **Woodsy Wonders** is an elegant art & craft store website focused exclusively on **Wooden Crafts**. From hand-carved sculptures to rustic wooden decor, this platform brings the charm of natural woodwork into the digital space — celebrating craftsmanship, sustainability, and timeless beauty.
 
